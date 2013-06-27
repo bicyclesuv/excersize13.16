@@ -5,7 +5,7 @@ using std::string;
 #include "Folder.h"
 class Message
 {
- public:
+public:
   //folders is initialized to the empty set automatically
    Message(const string &str = ""):
      contents(str) {}
@@ -16,7 +16,7 @@ class Message
 
    void save (Folder&);
    void remove(Folder&);
-  private:
+private:
    string contents;
    set<Folder*> folders;
 
@@ -36,6 +36,11 @@ Message& Message::operator=(const Message& rhs)
   folders = rhs.folders;
   put_Msg_in_Folders(rhs.folders);
 }
+Message::~Message()
+{
+    remove_Msg_from_Folders();
+}
+
 void Message::put_Msg_in_Folders(const set<Folder*> &rhs)
 {
   for( set<Folder*>::const_iterator beg = rhs.begin();
@@ -43,4 +48,9 @@ void Message::put_Msg_in_Folders(const set<Folder*> &rhs)
        ++beg;)
        (*beg) -> addMsg(this);
 }
-void M
+void Message::remove_Msg_from_Folders()
+{
+  for(set<folder*>::const_iterator beg = folders.begin(); beg != folder.end(); ++beg){
+    (*beg) -> remMsg(this);
+  }
+}
