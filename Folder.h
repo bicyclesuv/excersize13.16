@@ -6,4 +6,9 @@ using std::string;
 
 class Folder
 {
+  
+ private:
+  set<Message*> 
+  addMsg();
+  remMsg();
 }
